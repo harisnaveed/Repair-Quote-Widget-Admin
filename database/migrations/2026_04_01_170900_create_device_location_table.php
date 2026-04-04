@@ -15,6 +15,13 @@ return new class extends Migration
             $table->foreignId('device_id')->constrained()->cascadeOnDelete();
             $table->foreignId('location_id')->constrained()->cascadeOnDelete();
             $table->primary(['device_id', 'location_id']);
+            $table->enum('status', ['active', 'in_active'])->default('active');
+            $table->integer('position');
+
+            // Indexes
+            $table->index('status');
+            $table->index(['location_id', 'status']); // best for filtering
+            $table->timestamps();
         });
     }
 

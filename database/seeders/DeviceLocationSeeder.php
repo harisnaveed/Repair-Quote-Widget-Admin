@@ -5,41 +5,59 @@ namespace Database\Seeders;
 use App\Models\Device;
 use App\Models\Location;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Arr;
 
 class DeviceLocationSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $deviceIds = Device::pluck('id')->toArray();
-        $locationIds = Location::pluck('id')->toArray();
-
-        // Ensure there are devices and locations to attach
-        if (empty($deviceIds) || empty($locationIds)) {
+        // Ensure data exists
+        if (Device::count() === 0) {
             Device::factory()->count(5)->create();
+        }
+
+        if (Location::count() === 0) {
             Location::factory()->count(5)->create();
-            $deviceIds = Device::pluck('id')->toArray();
-            $locationIds = Location::pluck('id')->toArray();
         }
 
-        // Attach each device to 1..3 random locations
-        foreach (Device::all() as $device) {
-            $count = min(rand(1, 3), count($locationIds));
-            $attach = Arr::random($locationIds, $count);
-            if (! is_array($attach)) {
-                $attach = [$attach];
+        $devices = Device::all();
+        $locations = Location::all();
+
+        // 🔥 Attach devices to locations with pivot data
+        foreach ($devices as $device) {
+
+            // Pick 1–3 random locations
+            $selectedLocations = $locations->random(
+                min(rand(1, 3), $locations->count())
+            );
+
+            $attachData = [];
+
+            foreach ($selectedLocations as $index => $location) {
+                $attachData[$location->id] = [
+                    'status' => 'active',
+                    'position' => $index + 1, // ordered per device
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
             }
-            $device->locations()->syncWithoutDetaching($attach);
+
+            // Attach without removing existing
+            $device->locations()->syncWithoutDetaching($attachData);
         }
 
-        // Ensure each location has at least one device
-        foreach (Location::all() as $location) {
+        // 🔥 Ensure each location has at least ONE device
+        foreach ($locations as $location) {
+
             if ($location->devices()->count() === 0) {
-                $deviceId = Device::inRandomOrder()->first()->id;
-                $location->devices()->attach($deviceId);
+
+                $device = $devices->random();
+
+                $location->devices()->attach($device->id, [
+                    'status' => 'active',
+                    'position' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
         }
     }
