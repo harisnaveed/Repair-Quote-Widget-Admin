@@ -20,6 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('name');
+            $table->string('slug');       // Slug for URL-friendly identifiers
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();

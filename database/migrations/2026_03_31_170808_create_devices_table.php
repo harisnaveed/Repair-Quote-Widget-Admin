@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);       // Device name
+            $table->string('slug');       // Slug for URL-friendly identifiers
             $table->string('icon', 255)->nullable(); // Icon path or URL (optional)
             $table->timestamps();
         });

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');       // Slug for URL-friendly identifiers
             $table->text('description')->nullable();
             $table->string('icon', 255)->nullable(); // Icon path or URL (optional)
             $table->foreignId('device_id')->constrained()->cascadeOnDelete();
