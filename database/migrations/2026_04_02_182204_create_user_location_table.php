@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_location', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('location_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('location_id')->constrained()->cascadeOnDelete();
             $table->enum('status', ['active', 'in_active'])->default('active');
         });
     }

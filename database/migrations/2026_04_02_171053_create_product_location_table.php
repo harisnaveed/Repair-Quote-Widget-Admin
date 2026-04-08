@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('product_location', function (Blueprint $table) {
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('location_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('location_id')->constrained()->cascadeOnDelete();
+
             $table->primary(['product_id', 'location_id']);
             $table->enum('status', ['active', 'in_active'])->default('active');
             $table->integer('position');

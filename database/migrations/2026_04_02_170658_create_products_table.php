@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('icon', 255)->nullable(); // Icon path or URL (optional)
             $table->foreignId('device_id')->constrained()->cascadeOnDelete();
             $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('location_id')->nullable()->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });

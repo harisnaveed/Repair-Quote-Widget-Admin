@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('message')->nullable();
             $table->string('preference')->nullable(); // e.g., "email", "phone", "sms"
             $table->string('source')->nullable(); // e.g., "website", "social media", "referral"
+            $table->foreignUlid('location_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

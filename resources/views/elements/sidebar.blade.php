@@ -1,7 +1,30 @@
 		<div class="deznav">
 			<div class="deznav-scroll grid-menu">
 				<ul class="metismenu" id="menu">
-					<li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+					<li><a href="{{ url('/dashboard') }}" class="" aria-expanded="false">
+							<div class="menu-icon">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M5.55286 19.446H9.14743V13.1482H14.8507V19.446H18.4453V9.77373L11.9991 4.94055L5.55286 9.77571V19.446ZM5.55286 21.1493C5.08446 21.1493 4.68348 20.9825 4.34993 20.6489C4.01638 20.3154 3.84961 19.9144 3.84961 19.446V9.77373C3.84961 9.50478 3.90971 9.25 4.02991 9.00938C4.15011 8.76876 4.31791 8.56974 4.53331 8.4123L10.9735 3.57915C11.1317 3.46719 11.2973 3.38222 11.4704 3.32426C11.6434 3.26629 11.8215 3.2373 12.0045 3.2373C12.1875 3.2373 12.3642 3.26629 12.5347 3.32426C12.7052 3.38222 12.8685 3.46719 13.0246 3.57915L19.4648 8.4123C19.6798 8.57115 19.8486 8.77066 19.9709 9.01083C20.0933 9.251 20.1545 9.5053 20.1545 9.77373V19.446C20.1545 19.9144 19.9871 20.3154 19.6524 20.6489C19.3177 20.9825 18.9153 21.1493 18.4453 21.1493H13.2132V14.7857H10.7849V21.1493H5.55286Z"
+										fill="#6F767E" />
+								</svg>
+							</div>
+							<span class="nav-text">Dashboard</span>
+						</a>
+					</li>
+					<li><a href="{{ url('/locations') }}" class="" aria-expanded="false">
+							<div class="menu-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="#6F767E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="#6F767E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+							</div>
+							<span class="nav-text">Locations</span>
+						</a>
+					</li>
+
+                    <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
 							<div class="menu-icon ai-icon">
 								<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
 									xmlns="http://www.w3.org/2000/svg">

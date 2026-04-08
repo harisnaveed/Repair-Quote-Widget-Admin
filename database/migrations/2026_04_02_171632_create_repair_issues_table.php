@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
             $table->index(['device_id', 'brand_id']);
             $table->index(['device_id', 'name']);
+            $table->foreignUlid('location_id')->nullable()->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });

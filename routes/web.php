@@ -3,17 +3,34 @@
 use App\Http\Controllers\NexadashController;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
 Route::controller(NexadashController::class)->group(function () {
+
     Route::get('/', 'dashboard');
-    Route::get('/index ', 'dashboard');
-    Route::get('/index-2 ', 'dashboard_2');
-    Route::get('/index-3 ', 'dashboard_3');
-    Route::get('/index-4 ', 'dashboard_4');
+    Route::get('/index', 'dashboard');
+    Route::get('/dashboard', 'dashboard');
+
+    Route::get('/locations', 'dashboard');
+
+    // Route::get('/', 'dashboard');
+    // Route::get('/index', 'dashboard');
+    // Route::get('/index-2 ', 'dashboard_2');
+    // Route::get('/index-3 ', 'dashboard_3');
+    // Route::get('/index-4 ', 'dashboard_4');
     Route::get('/add-blog', 'add_blog');
     Route::get('/add-categary', 'add_categary');
     Route::get('/add-email', 'add_email');
     Route::get('/add-product', 'add_product');
-    Route::get('/analytics', 'analytics');
+    // Route::get('/analytics', 'analytics');
     Route::get('/app-calender', 'app_calender');
     Route::get('/app-profile', 'app_profile');
     Route::get('/app-profile-1', 'app_profile_1');
@@ -133,3 +150,5 @@ Route::controller(NexadashController::class)->group(function () {
     Route::get('/aikit/scheduled', 'scheduled');
     Route::get('/aikit/setting', 'setting');
 });
+
+require __DIR__.'/auth.php';

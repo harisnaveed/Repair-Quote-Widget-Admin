@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('location_repair_issue', function (Blueprint $table) {
-            $table->foreignId('location_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('location_id')->constrained()->cascadeOnDelete();
             $table->foreignId('repair_issue_id')->constrained()->cascadeOnDelete();
+
             $table->primary(['location_id', 'repair_issue_id']);
             $table->enum('status', ['active', 'in_active'])->default('active');
             $table->integer('position');

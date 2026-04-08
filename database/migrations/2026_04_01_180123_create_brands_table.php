@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);       // Device name
+            $table->string('name', 50);       // Brand name
             $table->string('slug');       // Slug for URL-friendly identifiers
             $table->string('icon', 255)->nullable(); // Icon path or URL (optional)
+            $table->foreignUlid('location_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
