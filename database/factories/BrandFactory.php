@@ -43,7 +43,9 @@ class BrandFactory extends Factory
 
         return [
             'name' => $brand,
+            'slug' => strtolower(str_replace(' ', '-', $brand)),
             'icon' => 'https://placehold.co/300x300/EEE/31343C?text='.str_replace(' ', '-', $brand),
+            'location_id' => null,
         ];
     }
 }

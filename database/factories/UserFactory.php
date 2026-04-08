@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -24,9 +25,25 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $userName = $this->faker->randomElement([
+            'Haris',
+            'Hamza',
+            'Atif',
+            'Shawaiz',
+            'Zohaib',
+            'Husnain',
+            'Ahsan',
+            'Zain',
+        ]);
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $userName,
+            'email' => strtolower($userName).random_int(1, 100).'@gmail.com',
+            'phone' => fake()->phoneNumber(),
+            'avatar' => 'https://placehold.co/300x300/EEE/31343C?text='.str_replace(' ', '-', $userName),
+            'company_id' => Company::factory(), // auto-create company if not passed
+            'owner' => 'false',
+            'status' => 'active',
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),

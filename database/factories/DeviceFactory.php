@@ -30,7 +30,9 @@ class DeviceFactory extends Factory
 
         return [
             'name' => $device,
+            'slug' => strtolower(str_replace(' ', '-', $device)),
             'icon' => 'https://placehold.co/300x300/EEE/31343C?text='.str_replace(' ', '-', $device),
+            'location_id' => null,
         ];
     }
 }

@@ -21,10 +21,13 @@ class LocationFactory extends Factory
         return [
             'company_id' => Company::factory(), // auto-create company if not passed
             'name' => $this->faker->city().' Branch',
+            'slug' => strtolower(str_replace(' ', '-', $this->faker->city().' Branch')),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),
             'gmb_link' => $this->faker->url(),
+            'notification_email' => $this->faker->unique()->safeEmail(),
+            'notification_phone' => $this->faker->phoneNumber(),
         ];
     }
 }

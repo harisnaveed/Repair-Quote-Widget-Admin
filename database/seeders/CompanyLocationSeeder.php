@@ -29,6 +29,13 @@ class CompanyLocationSeeder extends Seeder
                     ->create([
                         'company_id' => $company->id,
                         'name' => "{$company->name} - ".fake()->city().' Branch',
+                        'slug' => fake()->slug(),
+                        'email' => fake()->unique()->safeEmail(),
+                        'phone' => fake()->phoneNumber(),
+                        'address' => fake()->address(),
+                        'gmb_link' => fake()->url(),
+                        'notification_email' => fake()->unique()->safeEmail(),
+                        'notification_phone' => fake()->phoneNumber(),
                     ]);
             });
     }

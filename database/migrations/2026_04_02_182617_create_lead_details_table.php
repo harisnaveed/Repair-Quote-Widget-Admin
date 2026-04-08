@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('lead_id')->constrained()->cascadeOnDelete();
             $table->string('device_name')->nullable();
+            $table->foreignId('device_id')->nullable()->constrained()->nullOnDelete();
             $table->string('product_name')->nullable();
+            $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
             $table->string('issues')->nullable();
             $table->integer('repair_issue_id')->nullable(); // multiple issues will be stored
             $table->decimal('price', 10, 2)->default(0.00)->nullable();

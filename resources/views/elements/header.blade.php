@@ -13,18 +13,21 @@
 									</button></span>
 									<input type="text" class="form-control" placeholder="Search">
 								</div>
-							</form>	
+							</form>
 							@php
-    $menuConfig = config('dz.pagelevel.'.$CurrentPage.'.front-menu');
-@endphp
+                                $menuConfig = config('dz.pagelevel.'.$CurrentPage.'.front-menu');
+                            @endphp
 							@if(isset($menuConfig))
-							<div class="front-menu">
+							<!--
+                            <div class="front-menu">
 								<a href="{{ url('chat') }}" class="active">Apps</a>
 								<a href="{{ url('page-login') }}">Pages</a>
 								<a href="{{ url('uc-lightgallery') }}">Plugins</a>
 							</div>
-				@endif
+                            -->
+				            @endif
                         </div>
+                        <!--
 						<div class="select-country">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path id="Vector" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#F0F0F0"/>
@@ -47,6 +50,7 @@
 								<option value="Month">italiano</option>
 							</select>
 						</div>
+                    -->
                         <ul class="navbar-nav header-right">
 							<li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link " href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -109,6 +113,7 @@
 									</div>
 								</div>
 							</li>
+                            <!--
 							<li class="nav-item dropdown notification_dropdown">
 								<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
@@ -261,7 +266,8 @@
 										<path d="M7.25004 14.525H13.575C13.7875 14.525 13.9657 14.4527 14.1094 14.3081C14.2532 14.1635 14.325 13.9844 14.325 13.7706C14.325 13.5569 14.2532 13.3792 14.1094 13.2375C13.9657 13.0958 13.7875 13.025 13.575 13.025H7.25004C7.03754 13.025 6.85941 13.0973 6.71566 13.2419C6.57191 13.3865 6.50004 13.5656 6.50004 13.7794C6.50004 13.9931 6.57191 14.1708 6.71566 14.3125C6.85941 14.4542 7.03754 14.525 7.25004 14.525ZM7.25004 11.275H17.75C17.9625 11.275 18.1407 11.2027 18.2844 11.0581C18.4282 10.9135 18.5 10.7344 18.5 10.5206C18.5 10.3069 18.4282 10.1292 18.2844 9.98749C18.1407 9.84583 17.9625 9.77499 17.75 9.77499H7.25004C7.03754 9.77499 6.85941 9.84729 6.71566 9.99187C6.57191 10.1365 6.50004 10.3156 6.50004 10.5294C6.50004 10.7431 6.57191 10.9208 6.71566 11.0625C6.85941 11.2042 7.03754 11.275 7.25004 11.275ZM7.25004 8.02499H17.75C17.9625 8.02499 18.1407 7.9527 18.2844 7.80812C18.4282 7.66352 18.5 7.48435 18.5 7.27062C18.5 7.05687 18.4282 6.87916 18.2844 6.73749C18.1407 6.59583 17.9625 6.52499 17.75 6.52499H7.25004C7.03754 6.52499 6.85941 6.59729 6.71566 6.74187C6.57191 6.88647 6.50004 7.06564 6.50004 7.27937C6.50004 7.49312 6.57191 7.67083 6.71566 7.81249C6.85941 7.95416 7.03754 8.02499 7.25004 8.02499ZM6.35059 18.6494L3.80494 21.1951C3.53572 21.4643 3.22603 21.5264 2.87586 21.3813C2.52568 21.2363 2.35059 20.9773 2.35059 20.6043V4.05379C2.35059 3.59218 2.51946 3.1919 2.85721 2.85297C3.19498 2.51402 3.59385 2.34454 4.05384 2.34454H20.9462C21.4079 2.34454 21.8081 2.51402 22.1471 2.85297C22.486 3.1919 22.6555 3.59218 22.6555 4.05379V16.9462C22.6555 17.4062 22.486 17.8051 22.1471 18.1428C21.8081 18.4806 21.4079 18.6494 20.9462 18.6494H6.35059ZM4.05384 16.9462H20.9462V4.05379H4.05384V16.9462Z" fill="black"/>
 									</svg>
                                 </a>
-							</li>	
+							</li>
+                            -->
 							<li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link dz-fullscreen" href="javascript:void(0);">
 									<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -269,6 +275,7 @@
 									</svg>
                                 </a>
 							</li>
+
 							<li class="nav-item ps-3">
 								<div class="dropdown header-profile2">
 									<a class="nav-link p-0" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -285,8 +292,8 @@
 													<img src="{{ asset('images/user1.jpg') }}" class="avatar avatar-md" alt="">
 													<div>
 														<h6>Thomas Fleming</h6>
-														<span>Web Designer</span>	
-													</div>	
+														<span>Web Designer</span>
+													</div>
 												</div>
 											</div>
 											<div class="card-body px-0 py-2">
@@ -298,6 +305,15 @@
 
 													<span class="ms-2">Profile </span>
 												</a>
+                                                <a href="{{ url('app-profile') }}" class="dropdown-item ai-icon ">
+													<svg  width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path fill-rule="evenodd" clip-rule="evenodd" d="M11.9848 15.3462C8.11714 15.3462 4.81429 15.931 4.81429 18.2729C4.81429 20.6148 8.09619 21.2205 11.9848 21.2205C15.8524 21.2205 19.1543 20.6348 19.1543 18.2938C19.1543 15.9529 15.8733 15.3462 11.9848 15.3462Z" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													<path fill-rule="evenodd" clip-rule="evenodd" d="M11.9848 12.0059C14.5229 12.0059 16.58 9.94779 16.58 7.40969C16.58 4.8716 14.5229 2.81445 11.9848 2.81445C9.44667 2.81445 7.38857 4.8716 7.38857 7.40969C7.38 9.93922 9.42381 11.9973 11.9524 12.0059H11.9848Z" stroke="var(--primary)" stroke-width="1.42857" stroke-linecap="round" stroke-linejoin="round"/>
+													</svg>
+
+													<span class="ms-2">Security </span>
+												</a>
+                                                <!--
 												<a href="{{ url('app-profile') }}" class="dropdown-item ai-icon ">
 													<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
 
@@ -319,6 +335,7 @@
 
 													<span class="ms-2">Notification </span>
 												</a>
+                                                -->
 											</div>
 											<div class="card-footer px-0 py-2">
 												<a href="javascript:void(0);" class="dropdown-item ai-icon ">
@@ -335,14 +352,14 @@
 												</a>
 											</div>
 										</div>
-										
+
 									</div>
 								</div>
 							</li>
 							@php
     $icon = config('dz.pagelevel.'.$CurrentPage.'.sidebar-add-icon');
 @endphp
-							@if ($icon == true) 
+							@if ($icon == true)
 								<li class="nav-item dropdown notification_dropdown sidebar-close">
 								<a class="nav-link" href="javascript:void(0);">
 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -351,7 +368,7 @@
 										<polyline points="9 18 15 12 9 6"></polyline>
 									</svg>
 								</a>
-							</li> 
+							</li>
 						@endif
                         </ul>
                     </div>
