@@ -2,28 +2,28 @@
 
 namespace Database\Seeders;
 
-use App\Models\Device;
+use App\Models\Brand;
 use App\Models\Location;
 use Illuminate\Database\Seeder;
 
-class DeviceLocationSeeder extends Seeder
+class BrandLocationSeeder extends Seeder
 {
     public function run(): void
     {
         // Ensure data exists
-        if (Device::count() === 0) {
-            Device::factory()->count(5)->create();
+        if (Brand::count() === 0) {
+            Brand::factory()->count(5)->create();
         }
 
         if (Location::count() === 0) {
             Location::factory()->count(5)->create();
         }
 
-        $devices = Device::all();
+        $brands = Brand::all();
         $locations = Location::all();
 
-        // 🔥 Attach devices to locations with pivot data
-        foreach ($devices as $device) {
+        // 🔥 Attach brands to locations with pivot data
+        foreach ($brands as $brand) {
 
             // Pick 1–3 random locations
             $selectedLocations = $locations->random(
@@ -35,24 +35,24 @@ class DeviceLocationSeeder extends Seeder
             foreach ($selectedLocations as $index => $location) {
                 $attachData[$location->id] = [
                     'is_active' => true,
-                    'position' => $index + 1, // ordered per device
+                    'position' => $index + 1, // ordered per brand
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
             }
 
             // Attach without removing existing
-            $device->locations()->syncWithoutDetaching($attachData);
+            $brand->locations()->syncWithoutDetaching($attachData);
         }
 
-        // 🔥 Ensure each location has at least ONE device
+        // 🔥 Ensure each location has at least ONE brand
         foreach ($locations as $location) {
 
-            if ($location->devices()->count() === 0) {
+            if ($location->brands()->count() === 0) {
 
-                $device = $devices->random();
+                $brand = $brands->random();
 
-                $location->devices()->attach($device->id, [
+                $location->brands()->attach($brand->id, [
                     'is_active' => true,
                     'position' => 1,
                     'created_at' => now(),

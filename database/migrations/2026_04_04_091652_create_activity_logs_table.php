@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); // The user who performed the action, if applicable
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete(); // The user who performed the action, if applicable
             $table->string('action')->nullable(); // 'created', 'updated', 'deleted', 'restored'
             $table->string('action_label')->nullable(); // Added iPhone 16 to BMR Orlando"
             $table->string('entity_type')->nullable(); // Table name or model class name of the affected entity
@@ -30,7 +30,7 @@ return new class extends Migration
         });
     }
 
-    /**
+    /***
      * Reverse the migrations.
      */
     public function down(): void

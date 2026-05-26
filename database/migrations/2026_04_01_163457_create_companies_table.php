@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('no_of_locations')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

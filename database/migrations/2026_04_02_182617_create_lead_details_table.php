@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('lead_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lead_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('lead_id')->constrained('leads')->cascadeOnDelete();
             $table->string('device_name')->nullable();
-            $table->foreignId('device_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('device_id')->nullable()->constrained('devices')->cascadeOnDelete();
             $table->string('product_name')->nullable();
-            $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();
             $table->string('issues')->nullable();
-            $table->integer('repair_issue_id')->nullable(); // multiple issues will be stored
+            $table->json('repair_issue_ids')->nullable(); // multiple issues will be stored [1,2,5]
             $table->decimal('price', 10, 2)->default(0.00)->nullable();
             $table->timestamps();
         });

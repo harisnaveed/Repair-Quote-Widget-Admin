@@ -2,22 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\Company;
-use App\Models\User;
+use App\Models\PlatformUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends Factory<User>
+ * @extends Factory<PlatformUser>
  */
-class UserFactory extends Factory
+class PlatformUserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
     /**
      * Define the model's default state.
      *
@@ -39,26 +33,14 @@ class UserFactory extends Factory
         return [
             'name' => $userName,
             'email' => strtolower($userName).random_int(1, 100).'@gmail.com',
-            'phone' => fake()->phoneNumber(),
+            'phone' => $this->faker->phoneNumber(),
             'avatar' => 'https://placehold.co/300x300/EEE/31343C?text='.str_replace(' ', '-', $userName),
-            'company_id' => Company::factory(), // auto-create company if not passed
-            'owner' => random_int(0, 1) ? 'true' : 'false',
             'is_active' => true,
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now(),
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
     }
 }

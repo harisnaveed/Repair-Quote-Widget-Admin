@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('brand_location', function (Blueprint $table) {
-            $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
-            $table->foreignUlid('location_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
+            $table->foreignId('location_id')->constrained('locations')->cascadeOnDelete();
             $table->primary(['brand_id', 'location_id']);
-            $table->enum('status', ['active', 'in_active'])->default('active');
+            $table->boolean('is_active')->default(true);
             $table->integer('position');
 
             // Indexes
-            $table->index('status');
-            $table->index(['location_id', 'status']); // best for filtering
+            $table->index('is_active');
+            $table->index(['location_id', 'is_active']); // best for filtering
             $table->timestamps();
         });
     }

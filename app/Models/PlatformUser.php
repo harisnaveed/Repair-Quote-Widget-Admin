@@ -2,25 +2,30 @@
 
 namespace App\Models;
 
+use Database\Factories\PlatformUserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Company extends Model
+class PlatformUser extends Model
 {
+    /** @use HasFactory<PlatformUserFactory> */
     use HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
-        'slug',
         'email',
         'phone',
-        'no_of_locations',
+        'avatar',
         'is_active',
     ];
 
-    public function locations()
-    {
-        return $this->hasMany(Location::class);
-    }
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

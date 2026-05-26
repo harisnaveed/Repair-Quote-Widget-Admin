@@ -26,6 +26,7 @@ return new class extends Migration
         Schema::create($tableNames['permissions'], static function (Blueprint $table) {
             $table->id(); // permission id
             $table->string('name');
+            $table->string('action')->nullable();
             $table->string('guard_name');
             $table->timestamps();
 
@@ -42,6 +43,9 @@ return new class extends Migration
                 $table->index($columnNames['team_foreign_key'], 'roles_team_foreign_key_index');
             }
             $table->string('name');
+            $table->string('description')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies')->nullOnDelete();
+            $table->foreignId('location_id')->nullable()->constrained('locations')->nullOnDelete();
             $table->string('guard_name');
             $table->timestamps();
             if ($teams || config('permission.testing')) {

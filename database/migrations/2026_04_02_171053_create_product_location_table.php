@@ -12,22 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_location', function (Blueprint $table) {
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->foreignUlid('location_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('location_id')->constrained('locations')->cascadeOnDelete();
 
             $table->primary(['product_id', 'location_id']);
-            $table->enum('status', ['active', 'in_active'])->default('active');
+            $table->boolean('is_active')->default(true);
             $table->integer('position');
 
             // Indexes
-            $table->index('status');
-            $table->index(['location_id', 'status']); // best for filtering
-            $table->index(['product_id', 'status']); // best for filtering
+            $table->index('is_active');
+            $table->index(['location_id', 'is_active']); // best for filtering
             $table->timestamps();
         });
     }
 
-    /**
+    /***
      * Reverse the migrations.
      */
     public function down(): void

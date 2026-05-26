@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,8 +25,14 @@ class DatabaseSeeder extends Seeder
             DeviceSeeder::class,
             BrandSeeder::class,
             DeviceLocationSeeder::class,
+            BrandLocationSeeder::class,
             UserSeeder::class,
+            PlatformUserSeeder::class,
+            DeviceBrandSeeder::class,
             RolePermissionSeeder::class,
+            ProductSeriesSeeder::class,
+            ProductSeeder::class,
+            RepairIssueSeeder::class,
         ]);
     }
 }

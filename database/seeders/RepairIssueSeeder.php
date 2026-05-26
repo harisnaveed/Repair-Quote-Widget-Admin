@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Device;
+use App\Models\RepairIssue;
 use Illuminate\Database\Seeder;
 
-class DeviceSeeder extends Seeder
+class RepairIssueSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Device::factory()->count(7)->create();
+        //
+        RepairIssue::factory()->count(10)->create();
     }
 }

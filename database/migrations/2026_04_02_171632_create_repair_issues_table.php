@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('slug');       // Slug for URL-friendly identifiers
             $table->text('description')->nullable();
             $table->string('icon', 255)->nullable(); // Icon path or URL (optional)
-            $table->foreignId('device_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('device_id')->constrained('devices')->cascadeOnDelete();
+            $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
+            $table->foreignId('location_id')->nullable()->constrained('locations')->cascadeOnDelete();
+
             $table->index(['device_id', 'brand_id']);
             $table->index(['device_id', 'name']);
-            $table->foreignUlid('location_id')->nullable()->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });

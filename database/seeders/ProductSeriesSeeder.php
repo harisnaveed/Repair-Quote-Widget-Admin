@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Device;
+use App\Models\ProductSeries;
 use Illuminate\Database\Seeder;
 
-class DeviceSeeder extends Seeder
+class ProductSeriesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Device::factory()->count(7)->create();
+        ProductSeries::factory()->count(7)->create();
     }
 }

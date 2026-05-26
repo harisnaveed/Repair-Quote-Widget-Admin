@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('name', 50);       // Device name
             $table->string('slug');       // Slug for URL-friendly identifiers
             $table->string('icon', 255)->nullable(); // Icon path or URL (optional)
-            $table->foreignUlid('location_id')->nullable()->constrained()->cascadeOnDelete(); // Optional location association
+            $table->foreignId('location_id')->nullable()->constrained('locations')->cascadeOnDelete(); // Optional location association
 
             $table->timestamps();
         });
     }
 
-    /**
+    /***
      * Reverse the migrations.
      */
     public function down(): void

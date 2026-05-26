@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('locations', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->id();
 
             // Foreign Key
             $table->foreignId('company_id')
-                ->constrained()
+                ->constrained('companies')
                 ->cascadeOnDelete();
 
             $table->string('name');
@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('gmb_link')->nullable();
-
             $table->string('notification_email')->nullable();
             $table->string('notification_phone')->nullable();
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
         });

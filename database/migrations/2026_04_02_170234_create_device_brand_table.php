@@ -6,18 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /***
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('device_brand', function (Blueprint $table) {
-            $table->foreignId('device_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('device_id')->constrained('devices')->cascadeOnDelete();
+            $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
         });
     }
 
-    /**
+    /***
      * Reverse the migrations.
      */
     public function down(): void

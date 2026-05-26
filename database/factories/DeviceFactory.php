@@ -18,7 +18,7 @@ class DeviceFactory extends Factory
     public function definition(): array
     {
 
-        $device = $this->faker->randomElement([
+        $devices = [
             'Smartphone',
             'Tablet',
             'Laptop',
@@ -26,7 +26,9 @@ class DeviceFactory extends Factory
             'Gaming Consoles',
             'Desktop PCs',
             'Drones',
-        ]);
+        ];
+
+        $device = fake()->unique()->randomElement($devices);
 
         return [
             'name' => $device,
