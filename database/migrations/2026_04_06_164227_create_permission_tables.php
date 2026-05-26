@@ -43,7 +43,7 @@ return new class extends Migration
                 $table->index($columnNames['team_foreign_key'], 'roles_team_foreign_key_index');
             }
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies')->nullOnDelete();
             $table->foreignId('location_id')->nullable()->constrained('locations')->nullOnDelete();
             $table->string('guard_name');

@@ -25,7 +25,12 @@ class Device extends Model
 
     public function locations()
     {
-        return $this->belongsToMany(Location::class)
+        return $this->belongsToMany(
+            Location::class,
+            'device_location',
+            'device_id', // current table
+            'location_id' // related table
+        )
             ->withPivot('is_active', 'position')
             ->withTimestamps();
     }
@@ -44,5 +49,10 @@ class Device extends Model
     public function repairIssues()
     {
         return $this->hasMany(RepairIssue::class);
+    }
+
+    public function leadItems()
+    {
+        return $this->hasMany(LeadItems::class);
     }
 }

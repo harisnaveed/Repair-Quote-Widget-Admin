@@ -29,7 +29,12 @@ class Location extends Model
 
     public function devices()
     {
-        return $this->belongsToMany(Device::class)
+        return $this->belongsToMany(
+            Device::class,
+            'device_location',
+            'location_id', // current table
+            'device_id' // related table
+        )
             ->withPivot('is_active', 'position')
             ->withTimestamps();
     }
@@ -49,5 +54,22 @@ class Location extends Model
     public function repairIssues()
     {
         return $this->hasMany(RepairIssue::class);
+    }
+
+    public function repairIssuePricing()
+    {
+        return $this->hasMany(LocationProductRepairIssuePricing::class);
+    }
+
+    public function leads()
+    {
+        return $this->hasMany(Leads::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_location', 'location_id', 'user_id')
+            ->withPivot('is_active')
+            ->withTimestamps();
     }
 }

@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lead_details', function (Blueprint $table) {
+        Schema::create('lead_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lead_id')->constrained('leads')->cascadeOnDelete();
             $table->string('device_name')->nullable();
-            $table->foreignId('device_id')->nullable()->constrained('devices')->cascadeOnDelete();
+            $table->foreignId('device_id')->nullable()->constrained('devices')->nullOnDelete();
             $table->string('product_name')->nullable();
-            $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();
-            $table->string('issues')->nullable();
-            $table->json('repair_issue_ids')->nullable(); // multiple issues will be stored [1,2,5]
-            $table->decimal('price', 10, 2)->default(0.00)->nullable();
+            $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lead_details');
+        Schema::dropIfExists('lead_items');
     }
 };

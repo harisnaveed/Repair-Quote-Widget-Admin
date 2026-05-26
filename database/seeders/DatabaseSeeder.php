@@ -33,6 +33,9 @@ class DatabaseSeeder extends Seeder
             ProductSeriesSeeder::class,
             ProductSeeder::class,
             RepairIssueSeeder::class,
+            LocationProductRepairIssuePricingSeeder::class,
+            LeadsSeeder::class,
+            LeadItemsSeeder::class,
         ]);
     }
 }

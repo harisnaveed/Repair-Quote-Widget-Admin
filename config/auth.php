@@ -18,6 +18,9 @@ return [
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'platform' => env('PLATFORM_GUARD', 'platform'),
+        'platform_passwords' => env('PLATFORM_PASSWORD_BROKER', 'platform_users'),
+        'platform_password_timeout' => env('PLATFORM_PASSWORD_TIMEOUT', 10800),
     ],
 
     /*
@@ -42,6 +45,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
+        'platform' => [
+            'driver' => 'session',
+            'provider' => 'platform_users',
+        ],
     ],
 
     /*
@@ -65,6 +76,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
+        ],
+        'platform_users' => [
+            'driver' => 'eloquent',
+            'model' => env('PLATFORM_USER_MODEL', PlatformUser::class),
         ],
 
         // 'users' => [
@@ -99,6 +114,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'platform_users' => [
+            'provider' => 'platform_users',
+            'table' => env('PLATFORM_USER_PASSWORD_RESET_TOKEN_TABLE', 'platform_password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -113,5 +134,6 @@ return [
     */
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+    'platform_password_timeout' => env('PLATFORM_PASSWORD_TIMEOUT', 10800),
 
 ];

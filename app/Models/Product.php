@@ -40,4 +40,14 @@ class Product extends Model
     {
         return $this->belongsTo(ProductSeries::class);
     }
+
+    public function repairIssuePricing()
+    {
+        return $this->hasMany(LocationProductRepairIssuePricing::class);
+    }
+
+    public function leadItems()
+    {
+        return $this->hasMany(LeadItems::class);
+    }
 }

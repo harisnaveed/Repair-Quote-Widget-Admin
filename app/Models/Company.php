@@ -23,4 +23,9 @@ class Company extends Model
     {
         return $this->hasMany(Location::class);
     }
+
+    public function leads()
+    {
+        return $this->hasMany(Leads::class);
+    }
 }

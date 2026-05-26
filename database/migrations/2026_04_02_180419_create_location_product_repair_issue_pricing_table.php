@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('location_product_repair_issue_pricing', function (Blueprint $table) {
+        Schema::create('location_product_repair_issue_pricings', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('location_id')->constrained('locations')->cascadeOnDelete();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->foreignId('repair_issue_id')->constrained('repair_issues')->cascadeOnDelete();
@@ -25,11 +26,11 @@ return new class extends Migration
         });
     }
 
-    /***
+    /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('location_product_repair_issue_pricing');
+        Schema::dropIfExists('location_product_repair_issue_pricings');
     }
 };

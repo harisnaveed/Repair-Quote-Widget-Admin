@@ -7,15 +7,14 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, HasRoles, Notifiable;
 
-    use HasPermissions, HasRoles;
+    protected string $guard_name = 'web';
 
     /**
      * The attributes that are mass assignable.
@@ -27,9 +26,8 @@ class User extends Authenticatable
         'email',
         'phone',
         'avatar',
-        'company_id',
-        'owner',
         'is_active',
+        'password',
     ];
 
     /**
@@ -53,5 +51,12 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function locations()
+    {
+        return $this->belongsToMany(Location::class, 'user_location', 'user_id', 'location_id')
+            ->withPivot('is_active')
+            ->withTimestamps();
     }
 }

@@ -4,19 +4,23 @@ namespace App\Models;
 
 use Database\Factories\PlatformUserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
-class PlatformUser extends Model
+class PlatformUser extends Authenticatable
 {
     /** @use HasFactory<PlatformUserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, HasRoles, Notifiable;
+
+    protected string $guard_name = 'platform';
 
     protected $fillable = [
         'name',
         'email',
         'phone',
         'avatar',
+        'password',
         'is_active',
     ];
 
