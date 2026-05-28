@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\NexadashController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +13,24 @@ use Illuminate\Support\Facades\Route;
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+
+Route::middleware('guest')->group(function () {
+
+    Route::get('/login', [AuthenticationController::class, 'create']);
+
+    Route::post('/login', [AuthenticationController::class, 'store']);
+});
+
+Route::middleware('auth:web')->group(function () {
+
+    Route::post('/logout', [AuthenticationController::class, 'destroy']);
+
+    Route::get('/dashboard', function () {
+
+        return view('dashboard');
+
+    });
+});
 
 Route::controller(NexadashController::class)->group(function () {
 

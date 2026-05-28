@@ -4,7 +4,8 @@
 <head>
 @if(isset($baseHref)) <base href="../"> @endif
 
-<title><?php echo !empty(config('dz.pagelevel.'.$CurrentPage.'.title')) ? config('dz.pagelevel.'.$CurrentPage.'.title').' | ' : '' ; echo config('dz.site_level.site_title'); ?></title>
+<title><?php echo ! empty(config('dz.pagelevel.'.$CurrentPage.'.title')) ? config('dz.pagelevel.'.$CurrentPage.'.title').' | ' : '';
+echo config('dz.site_level.site_title'); ?></title>
 
 @include('elements.meta', ['CurrentPage' => $CurrentPage])
 <link rel="shortcut icon" type="image/png" href="{{ config('dz.site_level.favicon') }}">
