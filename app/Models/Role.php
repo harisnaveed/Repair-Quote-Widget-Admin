@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Permission\Models\Role as SpatieRole;
 
 class Role extends SpatieRole
 {
+    use HasFactory;
+
     protected $table = 'roles';
 
     protected $fillable = [
@@ -21,6 +24,12 @@ class Role extends SpatieRole
         'location_id' => 'integer',
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -30,6 +39,12 @@ class Role extends SpatieRole
     {
         return $this->belongsTo(Location::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
 
     public function scopePlatform($query)
     {

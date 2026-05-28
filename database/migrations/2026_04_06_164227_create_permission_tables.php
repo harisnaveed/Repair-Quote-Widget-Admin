@@ -48,10 +48,28 @@ return new class extends Migration
             $table->foreignId('location_id')->nullable()->constrained('locations')->nullOnDelete();
             $table->string('guard_name');
             $table->timestamps();
+            $table->index('company_id');
+            $table->index('location_id');
+            $table->index('guard_name');
+            $table->index([
+                'company_id',
+                'location_id',
+            ]);
             if ($teams || config('permission.testing')) {
-                $table->unique([$columnNames['team_foreign_key'], 'name', 'guard_name']);
+                $table->unique([
+                    $columnNames['team_foreign_key'],
+                    'name',
+                    'guard_name',
+                    'company_id',
+                    'location_id',
+                ], 'roles_team_name_guard_company_location_unique');
             } else {
-                $table->unique(['name', 'guard_name']);
+                $table->unique([
+                    'company_id',
+                    'location_id',
+                    'name',
+                    'guard_name',
+                ], 'roles_company_location_name_guard_unique');
             }
         });
 

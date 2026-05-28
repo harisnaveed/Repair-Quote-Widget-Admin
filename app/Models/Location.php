@@ -41,19 +41,38 @@ class Location extends Model
 
     public function brands()
     {
-        return $this->belongsToMany(Brand::class)
+        return $this->belongsToMany(
+            Device::class,
+            'brand_location',
+            'location_id', // current table
+            'brand_id' // related table
+        )
             ->withPivot('is_active', 'position')
             ->withTimestamps();
     }
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(
+            Product::class,
+            'product_location',
+            'location_id',
+            'product_id'
+        )
+            ->withPivot('is_active', 'position')
+            ->withTimestamps();
     }
 
     public function repairIssues()
     {
-        return $this->hasMany(RepairIssue::class);
+        return $this->belongsToMany(
+            RepairIssue::class,
+            'location_repair_issue',
+            'location_id',
+            'repair_issue_id'
+        )
+            ->withPivot('is_active', 'position')
+            ->withTimestamps();
     }
 
     public function repairIssuePricing()

@@ -32,7 +32,7 @@ class Leads extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function leadItems()
+    public function items()
     {
         return $this->hasMany(LeadItems::class);
     }

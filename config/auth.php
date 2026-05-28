@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PlatformUser;
 use App\Models\User;
 
 return [
@@ -18,9 +19,6 @@ return [
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
-        'platform' => env('PLATFORM_GUARD', 'platform'),
-        'platform_passwords' => env('PLATFORM_PASSWORD_BROKER', 'platform_users'),
-        'platform_password_timeout' => env('PLATFORM_PASSWORD_TIMEOUT', 10800),
     ],
 
     /*

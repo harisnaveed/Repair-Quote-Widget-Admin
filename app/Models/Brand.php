@@ -25,9 +25,14 @@ class Brand extends Model
 
     public function locations()
     {
-        return $this->belongsToMany(Location::class)
-            ->withPivot('is_active', 'position')
-            ->withTimestamps();
+        return $this->belongsToMany(
+          Location::class,
+          'brand_location',
+          'brand_id', // current table
+          'location_id' // related table
+      )
+        ->withPivot('is_active', 'position')
+        ->withTimestamps();
     }
 
     public function devices()

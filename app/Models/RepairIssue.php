@@ -31,9 +31,16 @@ class RepairIssue extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function location()
+    public function locations()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsToMany(
+            Location::class,
+            'location_repair_issue',
+            'repair_issue_id',
+            'location_id'
+        )
+            ->withPivot('is_active', 'position')
+            ->withTimestamps();
     }
 
     public function repairIssuePricing()
