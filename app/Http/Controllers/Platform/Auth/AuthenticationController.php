@@ -22,21 +22,20 @@ class AuthenticationController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'exists:platform_users,email'],
             'password' => ['required'],
+        ], [
+            'email.exists' => 'Email not found!',
         ]);
 
         if (Auth::guard('platform')->attempt($credentials, $request->boolean('remember'))) {
-
             $request->session()->regenerate();
 
-            return redirect()->intended(
-                route('platform.dashboard')
-            );
+            return redirect()->intended(route('platform.dashboard'));
         }
 
         return back()->withErrors([
-            'email' => 'Invalid credentials.',
+            'email' => 'Invalid credentials!',
         ])->onlyInput('email');
     }
 

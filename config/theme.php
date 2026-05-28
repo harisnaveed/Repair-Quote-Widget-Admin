@@ -2,7 +2,7 @@
 
 return [
 
-    'app_name' => 'Repair Management System',
+    'app_name' => env('APP_NAME', 'Repair Widget'),
 
     'author' => 'Haris Naveed',
 
