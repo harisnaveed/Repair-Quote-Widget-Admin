@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['lead_item_id', 'repair_issue_id'], 'lead_item_repair_issue_unique');
         });

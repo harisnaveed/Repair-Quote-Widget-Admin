@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('product_name')->nullable();
             $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

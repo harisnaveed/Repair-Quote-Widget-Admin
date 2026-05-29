@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('icon', 255)->nullable(); // Icon path or URL (optional)
             $table->foreignId('location_id')->nullable()->constrained('locations')->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

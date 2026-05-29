@@ -1,19 +1,23 @@
 <?php
-namespace App\Helper;
+
+namespace App\Helpers;
+
 use Illuminate\Support\Facades\Route;
-use Auth;
 
 class DzHelper
 {
-	public static function action() {
-		$chunks = explode("@",Route::currentRouteAction());
-		return end($chunks);
+    public static function action()
+    {
+        $chunks = explode('@', Route::currentRouteAction());
+
+        return end($chunks);
     }
-    
-    public static function controller() {
-	 	$chunks = explode("\\",Route::currentRouteAction());
-		$controller = explode("@",end($chunks));
-		return $controller[0]; 
+
+    public static function controller()
+    {
+        $chunks = explode('\\', Route::currentRouteAction());
+        $controller = explode('@', end($chunks));
+
+        return $controller[0];
     }
-	
 }

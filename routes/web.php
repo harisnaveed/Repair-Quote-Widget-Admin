@@ -13,30 +13,32 @@ use Illuminate\Support\Facades\Route;
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
-
+Route::redirect('/', '/dashboard');
 Route::middleware('guest')->group(function () {
 
-    Route::get('/login', [AuthenticationController::class, 'create']);
+    Route::get('/login', [AuthenticationController::class, 'showLoginForm'])->name('login');
 
-    Route::post('/login', [AuthenticationController::class, 'store']);
+    Route::post('/login', [AuthenticationController::class, 'login'])->name('login.submit')->middleware('throttle:user-login');
 });
 
 Route::middleware('auth:web')->group(function () {
 
-    Route::post('/logout', [AuthenticationController::class, 'destroy']);
+    Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('home');
+
+    Route::get('/index', function () {
+        return view('dashboard');
+    })->name('index');
 
     Route::get('/dashboard', function () {
-
         return view('dashboard');
-
-    });
+    })->name('dashboard');
 });
 
 Route::controller(NexadashController::class)->group(function () {
-
-    Route::get('/', 'dashboard');
-    Route::get('/index', 'dashboard');
-    Route::get('/dashboard', 'dashboard');
 
     Route::get('/locations', 'dashboard');
 
@@ -170,4 +172,4 @@ Route::controller(NexadashController::class)->group(function () {
     Route::get('/aikit/setting', 'setting');
 });
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';

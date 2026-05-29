@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('location_id')->nullable()->constrained('locations')->cascadeOnDelete(); // Optional location association
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

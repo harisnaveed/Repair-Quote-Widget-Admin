@@ -28,6 +28,7 @@ return new class extends Migration
             // Prevent duplicate series inside same brand
             $table->unique(['brand_id', 'slug']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

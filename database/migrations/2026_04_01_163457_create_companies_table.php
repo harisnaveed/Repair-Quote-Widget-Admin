@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('no_of_locations')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

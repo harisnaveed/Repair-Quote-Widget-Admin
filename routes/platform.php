@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Platform\Auth\AuthenticationController;
+use App\Http\Controllers\Platform\Company\CompanyController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('platform')
@@ -18,13 +19,27 @@ Route::prefix('platform')
 
         Route::middleware('auth:platform')->group(function () {
 
-            Route::post('/logout', [AuthenticationController::class, 'logout'])
-                ->name('logout');
+            Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
             Route::get('/dashboard', function () {
-
                 return view('platform.dashboard');
-
             })->name('dashboard');
+
+            // Companies Routes
+            // List all companies
+            Route::get('/clients', [CompanyController::class, 'index'])
+                ->name('companies');
+            // Delete a company
+            Route::delete('/clients/{company}', [CompanyController::class, 'destroy'])
+                ->name('companies.destroy');
+            // Toggle company status
+            Route::put('/clients/{company}/toggle-status', [CompanyController::class, 'toggleStatus'])
+                ->name('companies.toggle-status');
+            // View deleted companies
+            Route::get('/clients/deleted', [CompanyController::class, 'deletedCompanies'])
+                ->name('companies.deleted');
+            // Restore a company
+            Route::put('/clients/{company}/restore', [CompanyController::class, 'restoreCompany'])
+                ->name('companies.restore');
         });
     });

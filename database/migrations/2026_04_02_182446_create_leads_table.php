@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('location_id')->constrained('locations')->cascadeOnDelete();
             $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['location_id', 'company_id']);
         });

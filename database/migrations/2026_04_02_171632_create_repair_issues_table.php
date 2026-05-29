@@ -25,6 +25,7 @@ return new class extends Migration
             $table->index(['device_id', 'name']);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

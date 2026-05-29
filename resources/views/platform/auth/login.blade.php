@@ -8,8 +8,8 @@
 					<div class="login-form">
 						<div class="text-center">
 							<img src="{{ asset('images/logo-full.png') }}" class="mb-3 login-sm-logo mx-auto" alt="">
-							<h3 class="title">Sign In</h3>
-							<p>Sign in to your account to start using NexaDash</p>
+							<h3 class="title">Sign In (Platform)</h3>
+							<p>Sign in to your account to start using  {{config('theme.app_name')}}</p>
 						</div>
             <!--
             @if ($errors->any())
@@ -44,7 +44,7 @@
 							<div class="mb-4 position-relative">
 								<label class="mb-1">Password<span class="text-danger"> *</span></label>
 								<input type="password" id="dz-password" name="password" class="form-control form-control"
-									value="">
+									value="password">
 								<span class="show-pass eye">
 
 									<i class="fa fa-eye-slash"></i>

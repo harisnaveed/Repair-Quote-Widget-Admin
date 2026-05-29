@@ -4,13 +4,14 @@
 <head>
 @if(isset($baseHref)) <base href="../"> @endif
 
-<title><?php echo !empty(config('dz.pagelevel.'.$CurrentPage.'.title')) ? config('dz.pagelevel.'.$CurrentPage.'.title').' | ' : '' ; echo config('dz.site_level.site_title'); ?></title>
+<title><?php echo ! empty(config('dz.pagelevel.'.$CurrentPage.'.title')) ? config('dz.pagelevel.'.$CurrentPage.'.title').' | ' : '';
+echo config('dz.site_level.site_title'); ?></title>
 
 @include('elements.meta', ['CurrentPage' => $CurrentPage])
 <link rel="shortcut icon" type="image/png" href="{{ config('dz.site_level.favicon') }}">
 
 @include('elements.page-css', ['CurrentPage' => $CurrentPage])
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -59,7 +60,13 @@
 		<!--**********************************
             Sidebar start
         ***********************************-->
-@include('elements.sidebar')
+    @if (auth('platform')->check())
+      @include('elements.platform-sidebar')
+    @elseif(auth()->check())
+      @include('elements.sidebar')
+    @endif
+          
+
 		<!--**********************************
             Sidebar end
         ***********************************-->
@@ -83,6 +90,8 @@
 @include('elements.page-js', ['CurrentPage' => $CurrentPage])
 
 @yield('local-js')
+{{-- @include('elements.toastr') --}}
+@include('elements.toastr-js')
 </body>
 
 </html>
