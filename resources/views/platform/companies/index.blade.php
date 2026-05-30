@@ -19,7 +19,7 @@
               <span>Clients deleted by administrators are stored here.</span>
               <h6><a>You can review and restore them when needed.</a></h6>
               <x-button-anchor
-                  class="js-ajax-action" 
+                  class="js-ajax-action"
                   data-url="{{ route('platform.companies.create', 1) }}"
                   data-method="GET"
                   data-modal="true"
@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="card-body">
         <div class="table-responsive">
           <table id="example5" class="display table" style="min-width: 845px">
@@ -113,7 +113,7 @@
                         </svg>
                       </div>
                       <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item js-ajax-action" 
+                        <a class="dropdown-item js-ajax-action"
                         data-url="{{ route('platform.companies.view', $company->id) }}"
                         data-method="GET"
                         data-modal="true"
@@ -121,7 +121,7 @@
                         href="#">
                           View
                         </a>
-                        <a class="dropdown-item js-ajax-action" 
+                        <a class="dropdown-item js-ajax-action"
                         data-url="{{ route('platform.companies.edit', $company->id) }}"
                         data-method="GET"
                         data-modal="true"
@@ -129,7 +129,7 @@
                         href="#">
                           Edit
                         </a>
-                        <a class="dropdown-item js-ajax-action" 
+                        <a class="dropdown-item js-ajax-action"
                           data-url="{{ route('platform.companies.destroy', $company->id) }}"
                           data-method="DELETE"
                           data-confirm-title="Delete Client"
@@ -139,7 +139,7 @@
                           href="#">
                           Delete
                         </a>
-                        <a class="dropdown-item js-ajax-action" 
+                        <a class="dropdown-item js-ajax-action"
                           data-url="{{ route('platform.companies.toggle-status', $company->id) }}"
                           data-method="PUT"
                           data-confirm-title="{{ $company->is_active ? 'Deactivate Company' : 'Activate Company' }}"
@@ -151,7 +151,7 @@
                           href="#">
                           {{ $company->is_active ? 'Deactivate' : 'Activate' }}
                         </a>
-                        <a class="dropdown-item" href="#">View Locations</a>
+                        <a class="dropdown-item" href="{{ route('platform.locations', $company->id) }}">View Locations</a>
                       </div>
                     </div>
                   </td>
@@ -159,7 +159,7 @@
               @endforeach ()
             </tbody>
           </table>
-          
+
         </div>
       </div>
 @endsection

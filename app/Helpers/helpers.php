@@ -1,6 +1,23 @@
 <?php
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
+
+if (! function_exists('currentUser')) {
+
+    function currentUser(): ?Authenticatable
+    {
+        if (auth('platform')->check()) {
+            return auth('platform')->user();
+        }
+
+        if (auth('web')->check()) {
+            return auth('web')->user();
+        }
+
+        return null;
+    }
+}
 
 if (! function_exists('companyId')) {
 
@@ -63,5 +80,21 @@ if (! function_exists('activeStatus')) {
     function activeStatus(bool $status): string
     {
         return $status ? 'Active' : 'Inactive';
+    }
+}
+
+if (! function_exists('userType')) {
+
+    function userType(): ?string
+    {
+        if (auth('platform')->check()) {
+            return 'platform';
+        }
+
+        if (auth('web')->check()) {
+            return 'web';
+        }
+
+        return null;
     }
 }

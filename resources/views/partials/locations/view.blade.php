@@ -5,7 +5,7 @@
           Name
       </label>
       <div>
-          {{ $company->name }}
+          {{ $location->name }}
       </div>
   </div>
 
@@ -14,7 +14,7 @@
           Email
       </label>
       <div>
-          {{ $company->email ?? '-' }}
+          {{ $location->email ?? '-' }}
       </div>
   </div>
 
@@ -23,7 +23,7 @@
           Phone
       </label>
       <div>
-          {{ $company->phone ?? '-' }}
+          {{ $location->phone ?? '-' }}
       </div>
   </div>
 
@@ -32,7 +32,7 @@
           Status
       </label>
       <div>
-          @if($company->is_active)
+          @if($location->is_active)
               <span class="badge bg-success">
                   Active
               </span>
@@ -46,10 +46,46 @@
 
   <div class="col-md-6">
       <label class="form-label fw-bold">
-          No Of Locations
+          Address
       </label>
       <div>
-          {{ $company->no_of_locations ?? '-' }}
+          {{ $location->address ?? '-' }}
+      </div>
+  </div>
+
+  <div class="col-md-6">
+      <label class="form-label fw-bold">
+          Map
+      </label>
+      <div>
+        <x-button-anchor
+        href="{{ $location->gmb_link ?? '-' }}"
+        variant="primary"
+        class="px-2 py-1"
+        target="_blank"
+        >
+            Goto Map
+        </x-button-anchor>
+      </div>
+  </div>
+
+  <hr>
+
+  <div class="col-md-6">
+      <label class="form-label fw-bold">
+          Notification Email
+      </label>
+      <div>
+          {{ $location->notification_email ?? '-' }}
+      </div>
+  </div>
+
+  <div class="col-md-6">
+      <label class="form-label fw-bold">
+          Notification Phone
+      </label>
+      <div>
+          {{ $location->notification_phone ?? '-' }}
       </div>
   </div>
 
@@ -60,18 +96,18 @@
           Created At
       </label>
       <div>
-          {{ $company->created_at?->format('d M Y h:i A') }}
+          {{ $location->created_at?->format('d M Y h:i A') }}
       </div>
   </div>
 
 
-  @if($company->delete_at)
+  @if($location->delete_at)
   <div class="col-md-6">
       <label class="form-label fw-bold">
           Deleted At
       </label>
       <div>
-          {{ $company->deleted_at?->format('d M Y h:i A') ?? '-' }}
+          {{ $location->deleted_at?->format('d M Y h:i A') ?? '-' }}
       </div>
   </div>
   @endif

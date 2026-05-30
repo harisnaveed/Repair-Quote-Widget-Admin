@@ -1,4 +1,8 @@
-		<div class="header">
+		@php
+            $currentUser= currentUser();
+            $currentUserType = userType();
+        @endphp
+        <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
@@ -281,7 +285,7 @@
 									<a class="nav-link p-0" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 										<div class="header-info2 d-flex align-items-center">
 											<div class="header-media">
-												<img src="{{ asset('images/user1.jpg') }}" alt="">
+												<img src="{{ $currentUser->avatar }}" alt="{{ $currentUser->name }}">
 											</div>
 										</div>
 									</a>
@@ -289,10 +293,10 @@
 										<div class="card border-0 mb-0">
 											<div class="card-header py-2">
 												<div class="products">
-													<img src="{{ asset('images/user1.jpg') }}" class="avatar avatar-md" alt="">
+													<img src="{{ $currentUser->avatar }}" class="avatar avatar-md" alt="{{ $currentUser->name }}">
 													<div>
-														<h6>Thomas Fleming</h6>
-														<span>Web Designer</span>
+														<h6>{{ $currentUser->name }}</h6>
+														<span>{{ $currentUser->email }}</span>
 													</div>
 												</div>
 											</div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Partials\Location\LocationController;
 use App\Http\Controllers\Platform\Auth\AuthenticationController;
 use App\Http\Controllers\Platform\Company\CompanyController;
 use Illuminate\Support\Facades\Route;
@@ -56,5 +57,10 @@ Route::prefix('platform')
             // Store a company
             Route::post('/clients', [CompanyController::class, 'storeCompany'])
                 ->name('companies.store');
+            // Location Routes
+            Route::get('/{company}/locations', [LocationController::class, 'index'])
+                ->name('locations');
+            Route::get('/location/{location}/view', [LocationController::class, 'viewLocation'])
+                ->name('location.view');
         });
     });
