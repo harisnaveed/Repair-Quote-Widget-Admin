@@ -5,6 +5,7 @@ namespace App\Services\Company;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CompanyService
 {
@@ -19,14 +20,22 @@ class CompanyService
 
     public function store(array $data): Company
     {
-        return Company::create($data);
+        return DB::transaction(function () use ($data) {
+            $data['slug'] = Str::slug($data['name']);
+
+            return Company::create($data);
+        }, 5);
     }
 
     public function update(Company $company, array $data): Company
     {
-        $company->update($data);
+        $data['slug'] = Str::slug($data['name']);
 
-        return $company->refresh();
+        return DB::transaction(function () use ($company, $data) {
+            $company->update($data);
+
+            return $company->fresh();
+        });
     }
 
     public function delete(Company $company): bool
@@ -68,12 +77,21 @@ class CompanyService
         return Company::withTrashed()->latest()->get();
     }
 
-    public function toggleStatus(Company $company): bool
+    public function toggleStatus(int $id): Company
     {
-        $company->update([
-            'is_active' => ! $company->is_active,
-        ]);
+        $company = Company::findOrFail($id);
 
-        return $company->refresh()->is_active;
+        return DB::transaction(function () use ($company) {
+            $company->update([
+                'is_active' => ! $company->is_active,
+            ]);
+
+            return $company->refresh();
+        });
+    }
+
+    public function getCompany(int $id): ?Company
+    {
+        return Company::withTrashed()->find($id);
     }
 }

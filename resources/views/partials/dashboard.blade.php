@@ -27,7 +27,15 @@
 											</clipPath>
 											</defs>
 										</svg>
-										Hi Platform Dashboard!
+										@if (auth('platform')->check())
+
+                      <h2> Hi Platform Dashboard</h2>
+
+                        @elseif(auth()->check())
+
+                        <h2> Hi User Dashboard</h2>
+
+                        @endif
 									</h2>
 									<span>it’s good to see you again.</span>
 									<h6>Clock your daily task & Schedules </h6>

@@ -32,7 +32,7 @@
               -->      
 						<form action="{{ route('platform.login.submit') }}" method="POST">
               @csrf
-							<div class="mb-4">
+							{{-- <div class="mb-4">
 								<label class="mb-1">Email<span class="text-danger"> *</span></label>
 								<input type="email" class="form-control form-control" name="email" value="{{ old('email') }}">
                 @error('email')
@@ -40,24 +40,29 @@
                         {{ $message }}
                     </div>
                 @enderror
+							</div> --}}
+							<div class="mb-4">
+								<x-forms.floating-input
+                    id="email"
+                    field="email"
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    label="Email Address *"
+                    placeholder="Email Address"
+                />
 							</div>
-							<div class="mb-4 position-relative">
-								<label class="mb-1">Password<span class="text-danger"> *</span></label>
-								<input type="password" id="dz-password" name="password" class="form-control form-control"
-									value="password">
-								<span class="show-pass eye">
-
-									<i class="fa fa-eye-slash"></i>
-									<i class="fa fa-eye"></i>
-
-								</span>
-                
+              <div class="mb-4">
+								<x-forms.floating-input
+                    id="dz-password"
+                    field="password"
+                    type="password"
+                    name="password"
+                    value="password"
+                    label="Password *"
+                    placeholder="Password"
+                />
 							</div>
-              @error('password')
-                    <div class="text-danger mt-1">
-                        {{ $message }}
-                    </div>
-                @enderror
 							<div class="form-row d-flex justify-content-between mt-4 mb-2">
 								<div class="mb-4">
 									<div class="form-check custom-checkbox mb-3">

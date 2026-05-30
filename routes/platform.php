@@ -22,7 +22,7 @@ Route::prefix('platform')
             Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
             Route::get('/dashboard', function () {
-                return view('platform.dashboard');
+                return view('partials.dashboard');
             })->name('dashboard');
 
             // Companies Routes
@@ -41,5 +41,20 @@ Route::prefix('platform')
             // Restore a company
             Route::put('/clients/{company}/restore', [CompanyController::class, 'restoreCompany'])
                 ->name('companies.restore');
+            // Show a company
+            Route::get('/clients/{company}/view', [CompanyController::class, 'viewCompany'])
+                ->name('companies.view');
+            // Edit a company
+            Route::get('/clients/{company}/edit', [CompanyController::class, 'editCompany'])
+                ->name('companies.edit');
+            // Update a company
+            Route::put('/clients/{company}', [CompanyController::class, 'updateCompany'])
+                ->name('companies.update');
+            // Create a company
+            Route::get('/clients/create', [CompanyController::class, 'createCompany'])
+                ->name('companies.create');
+            // Store a company
+            Route::post('/clients', [CompanyController::class, 'storeCompany'])
+                ->name('companies.store');
         });
     });

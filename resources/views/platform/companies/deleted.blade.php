@@ -85,9 +85,32 @@
                         </svg>
                       </div>
                       <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item js-restore-company" data-id="{{ $company->id }}" href="#">Restore</a>
-                        <a class="dropdown-item" href="#">View</a>
-                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item js-ajax-action" 
+                          data-url="{{ route('platform.companies.restore', $company->id) }}"
+                          data-method="PUT"
+                          data-confirm-title="Restore Client"
+                          data-confirm-message="Are you sure you want to restore {{$company->name}}?"
+                          data-confirm-icon="warning"
+                          data-reload="false"
+                          href="#">
+                          Restore
+                        </a>
+                        <a class="dropdown-item js-ajax-action" 
+                        data-url="{{ route('platform.companies.view', $company->id) }}"
+                        data-method="GET"
+                        data-modal="true"
+                        data-modal-title="Company Details"
+                        href="#">
+                          View
+                        </a>
+                        <a class="dropdown-item js-ajax-action" 
+                        data-url="{{ route('platform.companies.edit', $company->id) }}"
+                        data-method="GET"
+                        data-modal="true"
+                        data-modal-title="Company Details"
+                        href="#">
+                          Edit
+                        </a>
                         <a class="dropdown-item" href="#">View Locations</a>
                       </div>
                     </div>
@@ -101,35 +124,6 @@
 @endsection
 
 @section('local-js')
-<script>
-  const restoreCompanyUrl = "{{ route('platform.companies.restore', ':id') }}";
-  $(document).on(
-    'click',
-    '.js-restore-company',
-    function (e) {
-        e.preventDefault();
-        let id = $(this).data('id');
-        let url = restoreCompanyUrl.replace(':id', id);
-        if (!confirm('Restore company?')) {
-            return;
-        }
-        $.ajax({
-          url: url,
-            type: 'PUT',
-            headers: {
-                'X-CSRF-TOKEN':
-                    $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-              showToast(
-                  'success',
-                  response.message,
-                  'Success'
-              );
-                // location.reload();
-            }
-        });
-    }
-);
-</script>
+<script src="{{ asset('js/services/ajax-actions.js') }}"></script>
+<script src="{{ asset('js/services/ajax-form.js') }}"></script>
 @endsection

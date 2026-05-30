@@ -12,6 +12,7 @@ echo config('dz.site_level.site_title'); ?></title>
 
 @include('elements.page-css', ['CurrentPage' => $CurrentPage])
 <meta name="csrf-token" content="{{ csrf_token() }}">
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -85,7 +86,7 @@ echo config('dz.site_level.site_title'); ?></title>
         Main wrapper end
     ***********************************-->
 
-
+@include('elements.ajax-modal')
 
 @include('elements.page-js', ['CurrentPage' => $CurrentPage])
 

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\NexadashController;
+use App\Http\Controllers\Tenant\Auth\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {
@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
-Route::redirect('/', '/dashboard');
 Route::middleware('guest')->group(function () {
 
     Route::get('/login', [AuthenticationController::class, 'showLoginForm'])->name('login');
@@ -26,15 +25,15 @@ Route::middleware('auth:web')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
     Route::get('/', function () {
-        return view('dashboard');
+        return view('partials.dashboard');
     })->name('home');
 
     Route::get('/index', function () {
-        return view('dashboard');
+        return view('partials.dashboard');
     })->name('index');
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('partials.dashboard');
     })->name('dashboard');
 });
 

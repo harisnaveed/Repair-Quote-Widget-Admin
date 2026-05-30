@@ -20,6 +20,10 @@ class AuthenticationController extends Controller
      */
     public function showLoginForm()
     {
+        if (auth('platform')->check()) {
+            return redirect()->route('platform.dashboard');
+        }
+
         return view('platform.auth.login');
     }
 

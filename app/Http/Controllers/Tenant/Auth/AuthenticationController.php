@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Tenant\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ class AuthenticationController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('tenant.auth.login');
     }
 
     /**

@@ -18,7 +18,22 @@
             <div class="card-data">
               <span>Clients deleted by administrators are stored here.</span>
               <h6><a>You can review and restore them when needed.</a></h6>
-              <a href="{{ route('platform.companies.deleted') }}">View deleted clients</a>
+              <x-button-anchor
+                  class="js-ajax-action" 
+                  data-url="{{ route('platform.companies.create', 1) }}"
+                  data-method="GET"
+                  data-modal="true"
+                  data-modal-title="Company Details"
+                  variant="primary"
+              >
+                  Add Client
+              </x-button-anchor>
+              <x-button-anchor
+                  href="{{ route('platform.companies.deleted') }}"
+                  variant="danger"
+              >
+                  View Deleted Clients
+              </x-button-anchor>
             </div>
             <img src="{{ asset('images/pic1.png') }}" class="light-pic" alt="">
             <img src="{{ asset('images/pic2.png') }}" class="dark-pic" alt="">
@@ -98,10 +113,44 @@
                         </svg>
                       </div>
                       <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="#">View</a>
-                        <a class="dropdown-item" href="#">Edit</a>
-                        <a class="dropdown-item js-delete-company" data-id="{{ $company->id }}" href="#">Delete</a>
-                        <a class="dropdown-item js-disable-company" data-id="{{ $company->id }}" href="#">Disable</a>
+                        <a class="dropdown-item js-ajax-action" 
+                        data-url="{{ route('platform.companies.view', $company->id) }}"
+                        data-method="GET"
+                        data-modal="true"
+                        data-modal-title="Company Details"
+                        href="#">
+                          View
+                        </a>
+                        <a class="dropdown-item js-ajax-action" 
+                        data-url="{{ route('platform.companies.edit', $company->id) }}"
+                        data-method="GET"
+                        data-modal="true"
+                        data-modal-title="Company Details"
+                        href="#">
+                          Edit
+                        </a>
+                        <a class="dropdown-item js-ajax-action" 
+                          data-url="{{ route('platform.companies.destroy', $company->id) }}"
+                          data-method="DELETE"
+                          data-confirm-title="Delete Client"
+                          data-confirm-message="Are you sure you want to delete {{$company->name}}?"
+                          data-confirm-icon="warning"
+                          data-reload="false"
+                          href="#">
+                          Delete
+                        </a>
+                        <a class="dropdown-item js-ajax-action" 
+                          data-url="{{ route('platform.companies.toggle-status', $company->id) }}"
+                          data-method="PUT"
+                          data-confirm-title="{{ $company->is_active ? 'Deactivate Company' : 'Activate Company' }}"
+                          data-confirm-message="{{ $company->is_active
+                          ? "Are you sure you want to deactivate {$company->name}?"
+                          : "Are you sure you want to activate {$company->name}?" }}"
+                          data-confirm-icon="warning"
+                          data-reload="false"
+                          href="#">
+                          {{ $company->is_active ? 'Deactivate' : 'Activate' }}
+                        </a>
                         <a class="dropdown-item" href="#">View Locations</a>
                       </div>
                     </div>
@@ -110,40 +159,12 @@
               @endforeach ()
             </tbody>
           </table>
+          
         </div>
       </div>
 @endsection
 
 @section('local-js')
-<script>
-  const deleteCompanyUrl = "{{ route('platform.companies.destroy', ':id') }}";
-  $(document).on(
-    'click',
-    '.js-delete-company',
-    function (e) {
-        e.preventDefault();
-        let id = $(this).data('id');
-        let url = deleteCompanyUrl.replace(':id', id);
-        if (!confirm('Delete company?')) {
-            return;
-        }
-        $.ajax({
-          url: url,
-            type: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN':
-                    $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-              showToast(
-                  'success',
-                  response.message,
-                  'Success'
-              );
-                // location.reload();
-            }
-        });
-    }
-);
-</script>
+<script src="{{ asset('js/services/ajax-actions.js') }}"></script>
+<script src="{{ asset('js/services/ajax-form.js') }}"></script>
 @endsection

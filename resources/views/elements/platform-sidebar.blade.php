@@ -1,7 +1,7 @@
 <div class="deznav">
   <div class="deznav-scroll grid-menu">
     <ul class="metismenu" id="menu">
-      <li><a href="{{ url('/dashboard') }}" class="" aria-expanded="false">
+      <li><a href="{{ route('platform.dashboard') }}" class="" aria-expanded="false">
           <div class="menu-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
               xmlns="http://www.w3.org/2000/svg">

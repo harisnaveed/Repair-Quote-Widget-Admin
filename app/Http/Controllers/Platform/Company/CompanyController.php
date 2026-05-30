@@ -21,80 +21,108 @@ class CompanyController extends Controller
         return view('platform.companies.index', compact('companies'));
     }
 
-    public function create()
+    public function createCompany()
     {
-        return view('platform.companies.create');
+        return response()->json([
+            'success' => true,
+            'html' => view(
+                'platform.companies.create',
+            )->render(),
+        ]);
     }
 
-    public function store(StoreCompanyRequest $request)
+    public function storeCompany(StoreCompanyRequest $request)
     {
         $this->companyService->store(
             $request->validated()
         );
 
-        return redirect()
-            ->route('platform.companies.index')
-            ->with('success', 'Company created successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Company created successfully.',
+        ]);
     }
 
-    public function edit(Company $company)
+    public function editCompany(int $id)
     {
-        return view('platform.companies.edit', compact('company'));
+        $company = $this->companyService->getCompany($id);
+
+        if (! $company) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Company not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'html' => view(
+                'platform.companies.edit',
+                compact('company')
+            )->render(),
+        ]);
     }
 
-    public function update(
+    public function updateCompany(
         UpdateCompanyRequest $request,
         Company $company
     ) {
         $this->companyService->update(
-            $company,
-            $request->validated()
+            company: $company,
+            data: $request->validated()
         );
 
-        return redirect()
-            ->route('platform.companies.index')
-            ->with('success', 'Company updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => "{$company->name} has been updated successfully.",
+            'company' => $company,
+        ]);
     }
 
     public function destroy(Company $company)
     {
+        $name = $company->name;
         if (! $this->companyService->delete($company)) {
 
             return response()->json([
                 'success' => false,
-                'message' => 'Unable to delete company. Try again later.',
+                'message' => "Unable to delete {$name}. Try again later.",
             ], 500);
         }
 
         return response()->json([
             'success' => true,
-            'message' => 'Company deleted successfully.',
+            'message' => "{$name} has been deleted successfully.",
         ]);
     }
 
     public function restoreCompany(int $id)
     {
+        $name = $this->companyService->getCompany($id)->name;
         if (! $this->companyService->restore($id)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Unable to restore company. Try again later.',
+                'message' => "Unable to restore {$name}. Try again later.",
             ], 500);
         }
 
         return response()->json([
             'success' => true,
-            'message' => 'Company restored successfully.',
+            'message' => "{$name} has been restored successfully.",
         ]);
     }
 
-    public function toggleStatus(Company $company)
+    public function toggleStatus(int $id)
     {
-        $isActive = $this->companyService->toggleStatus($company);
+        $name = $this->companyService->getCompany($id)->name;
+        $company = $this->companyService->toggleStatus($id);
 
         return response()->json([
             'success' => true,
-            'is_active' => $isActive,
-            'message' => $isActive ? 'Company enabled successfully.' : 'Company disabled successfully.',
+            'status' => $company->is_active,
+            'message' => $company->is_active
+            ? "{$name} has been activated successfully."
+            : "{$name} has been deactivated successfully.",
         ]);
     }
 
@@ -103,5 +131,26 @@ class CompanyController extends Controller
         $companies = $this->companyService->getDeletedCompanies();
 
         return view('platform.companies.deleted', compact('companies'));
+    }
+
+    public function viewCompany(int $id)
+    {
+        $company = $this->companyService->getCompany($id);
+        $name = $company->name;
+
+        if (! $company) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Company not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'html' => view(
+                'partials.companies.view',
+                compact('company')
+            )->render(),
+        ]);
     }
 }
